@@ -35,6 +35,13 @@ namespace OpenHab.UniFiProxy
                 Console.WriteLine("Nothing to do. No jobs defined in jobs.json.");
                 return;
             }
+            if (jobSettings.PollInterval == 0)
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Nothing to do. Poll interval set to zero.");
+                return;
+            }
+
 
             Console.WriteLine("");
             Console.WriteLine(new string('=', 80));
@@ -209,7 +216,7 @@ namespace OpenHab.UniFiProxy
                 .Build();
 
             foreach (string requiredConfig in new string[]{
-                "unifiApiUrl", "unifiUserName", "unifiPassword", "openHabApiUrl"
+                "unifiApiUrl", "unifiUserName", "unifiPassword", "openHabApiUrl", "statsFrequency"
                 })
             {
                 if (string.IsNullOrWhiteSpace(config[requiredConfig]))
@@ -238,6 +245,7 @@ namespace OpenHab.UniFiProxy
                     jobSettings = JsonSerializer.Deserialize<JobSettings>(jobsJson);
                 }
                 catch { }
+                WriteConsole($"Job poll interval: {jobSettings.PollInterval}");
                 WriteConsole("Jobs:");
                 foreach (var job in jobSettings.Jobs)
                 {

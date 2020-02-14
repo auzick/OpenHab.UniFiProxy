@@ -9,6 +9,10 @@ namespace OpenHab.UniFiProxy.Model
         [JsonPropertyName("jobs")]
         public List<Job> Jobs { get; set; }
 
+        [JsonPropertyName("pollInterval")]
+        public int PollInterval { get; set; }
+
+
         public JobSettings()
         {
             Jobs = new List<Job>();

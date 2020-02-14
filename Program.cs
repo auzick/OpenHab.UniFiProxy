@@ -19,7 +19,6 @@ namespace OpenHab.UniFiProxy
         static string bearerToken;
         static UserInfo authenticatedUserInfo;
         static JobSettings jobSettings;
-        static int pollFrequency;
         static int statsFrequency;
         static string appPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
         static DateTime lastReport = DateTime.MinValue;
@@ -43,7 +42,7 @@ namespace OpenHab.UniFiProxy
             Console.WriteLine(new string('-', 80));
 
             TimerCallback tmCallback = RunJobs;
-            Timer timer = new Timer(tmCallback, null, pollFrequency * 1000, pollFrequency * 1000);
+            Timer timer = new Timer(tmCallback, null, jobSettings.PollInterval * 1000, jobSettings.PollInterval * 1000);
             Console.WriteLine("Press the enter key to stop.");
             Console.ReadLine();
         }
@@ -218,12 +217,6 @@ namespace OpenHab.UniFiProxy
                     WriteConsole($"Required configuration not defined: {requiredConfig}");
                     return false;
                 }
-            }
-
-            if (!int.TryParse(config["pollFrequency"], out pollFrequency))
-            {
-                WriteConsole($"Invalid value for pollFrequency: {config["pollFrequency"]}");
-                return false;
             }
 
             if (!int.TryParse(config["statsFrequency"], out statsFrequency))

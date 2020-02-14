@@ -3,32 +3,20 @@
     "jobs": [
         {
             "type": "motion",
-            "id": "5e3704ac001bda03e700041a",
-            "item": "SerranoGarageMotion",
+            "id": "<CAMERA ID>",
+            "item": "<OPENHAB ITEM>",
             "frequency": 3
         },
         {
             "type": "uptime",
-            "id": "5e3704ac001bda03e700041a",
-            "item": "SerranoGarageUpSince",
-            "frequency": 10
-        },
-        {
-            "type": "motion",
-            "id": "5e375ada006a9a03e7000528",
-            "item": "HarvestLrMotion",
-            "frequency": 3
-        },
-        {
-            "type": "uptime",
-            "id": "5e375ada006a9a03e7000528",
-            "item": "HarvestLrUpSince",
+            "id": "<CAMERA ID>",
+            "item": "<OPENHAB ITEM>",
             "frequency": 10
         },
         {
             "type": "storage",
             "id": "",
-            "item": "CloudKeyStorage",
+            "item": "<OPENHAB ITEM>",
             "frequency": 20
         }
     ]

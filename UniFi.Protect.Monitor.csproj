@@ -16,7 +16,8 @@
       <Link>appsettings.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="jobs.json">
+    <None Update="myjobs.json">
+      <Link>jobs.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

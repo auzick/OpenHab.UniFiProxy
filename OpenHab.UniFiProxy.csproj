@@ -11,13 +11,24 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.1" />
   </ItemGroup>
 
+  <!-- Copy my own app settings to the output directory when debugging -->
   <ItemGroup>
-    <None Update="myappsettings.json">
+    <None Update="myappsettings.json" Condition=" '$(Configuration)' == 'Debug' ">
       <Link>appsettings.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="myjobs.json">
+    <None Update="myjobs.json" Condition=" '$(Configuration)' == 'Debug' ">
       <Link>jobs.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- Copy the default app settings to the output directory for release builds -->
+  <ItemGroup>
+    <None Update="appsettings.json" Condition=" '$(Configuration)' == 'Release' ">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="jobs.json" Condition=" '$(Configuration)' == 'Release' ">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

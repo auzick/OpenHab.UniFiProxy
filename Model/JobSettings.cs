@@ -29,6 +29,9 @@ namespace OpenHab.UniFiProxy.Model
             [JsonPropertyName("item")]
             public string Item { get; set; }
 
+            // [JsonPropertyName("snapItem")]
+            // public string SnapItem { get; set; }
+
             [JsonPropertyName("frequency")]
             public long Frequency { get; set; }
 

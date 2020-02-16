@@ -9,6 +9,7 @@ using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using OpenHab.UniFiProxy.Model;
 using System.Threading;
+using System.ComponentModel;
 
 namespace OpenHab.UniFiProxy
 {
@@ -101,7 +102,6 @@ namespace OpenHab.UniFiProxy
             var camera = data.cameras.FirstOrDefault(c => c.id == job.Id);
             if (camera == null)
             {
-                // WriteConsole($"Camera {job.Id} unchanged.");
                 return;
             }
 
@@ -110,7 +110,6 @@ namespace OpenHab.UniFiProxy
 
             if (newVal == oldValue.ToString("yyyy-MM-ddThh:mm:ss"))
             {
-                // WriteConsole($"{job.Item} unchanged.");
                 return;
             }
 
@@ -124,6 +123,25 @@ namespace OpenHab.UniFiProxy
             job.LastRun = DateTime.Now;
             job.LastValue = newVal;
             WriteConsole($"{job.Item} updated to {newVal}.");
+        }
+
+        private static void RunSnap(JobSettings.Job job, Bootstrap data)
+        {
+            // Yeah, I'm stuck here.
+            var url = $"{config["unifiApiUrl"]}/cameras/{job.Id}/snapshot?accessKey={data.accessKey}";
+            var req = new HttpRequestMessage(HttpMethod.Post, url);
+            var response = CallUniFiApi(req);
+
+            if (response == null || !response.IsSuccessStatusCode)
+            {
+                WriteConsole(
+                    (response != null)
+                    ? $"Camera Snapshot failed. {response?.ReasonPhrase} ({response?.StatusCode})"
+                    : "Camera Snapshot failed."
+                    );
+            }
+            var responseData = response.Content.ReadAsByteArrayAsync();
+
         }
 
         private static void RunUptime(JobSettings.Job job, Bootstrap data)
@@ -249,7 +267,9 @@ namespace OpenHab.UniFiProxy
                 WriteConsole("Jobs:");
                 foreach (var job in jobSettings.Jobs)
                 {
-                    WriteConsole($"  {job.Type} {job.Id}: {job.Item}");
+                    var msg = $"  {job.Type} {job.Id}: {job.Item}";
+                    //if (!string.IsNullOrWhiteSpace(job.SnapItem)) { msg += $"/{job.SnapItem}"; }
+                    WriteConsole(msg);
                 }
             }
             if (jobSettings.Jobs.Count() == 0)

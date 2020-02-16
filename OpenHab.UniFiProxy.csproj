@@ -1,17 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.1" />
   </ItemGroup>
-
-  <!-- Copy my own app settings to the output directory when debugging -->
   <ItemGroup>
     <None Update="myappsettings.json" Condition=" '$(Configuration)' == 'Debug' ">
       <Link>appsettings.json</Link>
@@ -22,8 +21,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
-  <!-- Copy the default app settings to the output directory for release builds -->
   <ItemGroup>
     <None Update="appsettings.json" Condition=" '$(Configuration)' == 'Release' ">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -32,6 +29,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
-
 </Project>

@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Reflection;
-using System.Text.Json;
-using Microsoft.Extensions.Configuration;
 using OpenHab.UniFiProxy.Model;
 using System.Threading;
-using System.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 using OpenHab.UniFiProxy.Logging;
 using OpenHab.UniFiProxy.Clients;
 

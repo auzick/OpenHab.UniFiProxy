@@ -35,7 +35,10 @@ namespace OpenHab.UniFiProxy.Clients
             var oldValue = DateTime.MinValue;
             DateTime.TryParse(job.LastValue, out oldValue);
 
-            var camera = data.cameras.FirstOrDefault(c => c.id == job.Id);
+            var camera = data.cameras.FirstOrDefault(c =>
+                c.id == job.Id
+                || c.name == data.cameras.FirstOrDefault(c => c.name == job.Id)?.name
+                );
             if (camera == null)
             {
                 return;
@@ -85,7 +88,10 @@ namespace OpenHab.UniFiProxy.Clients
             var oldValue = DateTime.MinValue;
             DateTime.TryParse(job.LastValue, out oldValue);
 
-            var camera = data.cameras.FirstOrDefault(c => c.id == job.Id);
+            var camera = data.cameras.FirstOrDefault(c =>
+                c.id == job.Id
+                || c.name == data.cameras.FirstOrDefault(c => c.name == job.Id)?.name
+                );
             if (camera == null)
             {
                 return;

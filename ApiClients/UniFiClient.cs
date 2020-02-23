@@ -49,7 +49,7 @@ namespace OpenHab.UniFiProxy.Clients
             }
 
             var json = response.Content.ReadAsStringAsync().Result;
-            File.WriteAllText(Path.Join(_config.AppPath, "bootstrap.json"), json);
+            try { File.WriteAllText(Path.Join(_config.AppPath, "bootstrap.json"), json); } catch { }
 
             _counters.BootstrapCalls++;
 

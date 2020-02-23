@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using OpenHab.UniFiProxy.Model;
 
 namespace OpenHab.UniFiProxy
 {
@@ -21,17 +23,48 @@ namespace OpenHab.UniFiProxy
             return JsonSerializer.Deserialize<T>(json);
         }
 
+        // Assumes unix time is in milliseconds
         public static DateTime FromUnixTime(this double unixTime)
         {
-            return epoch.AddMilliseconds(unixTime).ToLocalTime();
+            return FromUnixTime((long)unixTime);
+            // return epoch.AddMilliseconds(unixTime).ToLocalTime();
         }
 
         public static DateTime FromUnixTime(this long unixTime)
         {
-            return epoch.AddMilliseconds(unixTime).ToLocalTime();
+            return DateTimeOffset.FromUnixTimeMilliseconds(unixTime).LocalDateTime;
+            // return epoch.AddMilliseconds(unixTime).ToLocalTime();
         }
 
-        private static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        public static long ToUnixTimestamp(this DateTime date)
+        {
+            return new DateTimeOffset(date).ToUnixTimeMilliseconds();
+        }
+
+        public static string ToOpenHabTimeString(this long unixDate)
+        {
+            return FromUnixTime(unixDate).ToOpenHabTimeString();
+        }
+
+        public static string ToOpenHabTimeString(this DateTime date)
+        {
+            return date.ToString("yyyy-MM-ddThh:mm:ss");
+        }
+
+        public static bool TryGetCamera(this Bootstrap bootstrap, string identifier, out Bootstrap.Camera camera)
+        {
+            if (!bootstrap.cameras.Any(c =>
+                c.id == identifier || c.name == identifier
+                ))
+            {
+                camera = null;
+                return false;
+            }
+            camera = bootstrap.cameras.First(c =>
+                c.id == identifier || c.name == identifier
+                );
+            return true;
+        }
 
 
     }

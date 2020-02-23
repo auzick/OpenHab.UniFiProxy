@@ -75,6 +75,9 @@ namespace OpenHab.UniFiProxy
                         case "uptime":
                             _openHabClient.RunUptime(job, data);
                             break;
+                        case "state":
+                            _openHabClient.RunState(job, data);
+                            break;
                         case "storage":
                             _openHabClient.RunStorage(job, data);
                             break;

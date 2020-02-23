@@ -134,8 +134,8 @@ namespace OpenHab.UniFiProxy.Model
             public int? channel { get; set; }
             public int? frequency { get; set; }
             public int? linkSpeedMbps { get; set; }
-            public int signalQuality { get; set; }
-            public int signalStrength { get; set; }
+            public int? signalQuality { get; set; }
+            public int? signalStrength { get; set; }
         }
 
         public class Battery

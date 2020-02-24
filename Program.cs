@@ -6,7 +6,7 @@ using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using OpenHab.UniFiProxy.Logging;
 using OpenHab.UniFiProxy.Clients;
-
+using System.Diagnostics;
 
 namespace OpenHab.UniFiProxy
 {
@@ -37,8 +37,25 @@ namespace OpenHab.UniFiProxy
             Log.Write(new string('-', 80));
 
             lastReport = DateTime.Now;
-            TimerCallback tmCallback = RunJobs;
-            Timer timer = new Timer(tmCallback, null, _config.Jobs.PollInterval * 1000, _config.Jobs.PollInterval * 1000);
+            // TimerCallback tmCallback = RunJobs;
+            // Timer timer = new Timer(tmCallback, null, _config.Jobs.PollInterval * 1000, _config.Jobs.PollInterval * 1000);
+
+            System.Threading.Timer timer = null;
+
+            timer = new System.Threading.Timer((g) =>
+            {
+                var start = DateTime.Now;
+                RunJobs();
+                var end = DateTime.Now;
+                var elapsed = (end - start).TotalMilliseconds;
+                _counters.LogExecution(elapsed);
+
+                var next = start.AddSeconds(_config.Jobs.PollInterval);
+                var delay = (next > end) ? (next - end).TotalMilliseconds : 0;
+                // Log.Write($"Waiting {delay} ms");
+                timer.Change((int)delay, Timeout.Infinite);
+            }, null, 0, Timeout.Infinite);
+
             Log.Write("Press the enter key to stop.");
             Console.ReadLine();
         }
@@ -55,7 +72,7 @@ namespace OpenHab.UniFiProxy
                 ;
         }
 
-        static void RunJobs(object stateInfo)
+        static void RunJobs()
         {
             var thisRun = DateTime.Now;
             Bootstrap data = null;

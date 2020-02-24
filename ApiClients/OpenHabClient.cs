@@ -46,7 +46,7 @@ namespace OpenHab.UniFiProxy.Clients
                 Log.Write($"Camera {job.Id} not found.");
                 return;
             }
-            PostChangedValue(job, camera.lastMotion.FromUnixTime());
+            PostChangedValue(job, camera.upSince.FromUnixTime());
         }
 
         public void RunState(JobSettings.Job job, Bootstrap bootstrap)

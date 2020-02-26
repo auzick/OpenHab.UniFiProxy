@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OpenHab.UniFiProxy.Logging;
 using OpenHab.UniFiProxy.Clients;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace OpenHab.UniFiProxy
 {
@@ -29,7 +30,7 @@ namespace OpenHab.UniFiProxy
             _openHabClient = serviceProvider.GetService<IOpenHabClient>();
             _uniFiClient = serviceProvider.GetService<IUniFiClient>();
 
-            if (!Initialize()) { return; }
+            if (!Initialize().Result) { return; }
 
             Log.Write("");
             Log.Write(new string('=', 80));
@@ -45,7 +46,7 @@ namespace OpenHab.UniFiProxy
             timer = new System.Threading.Timer((g) =>
             {
                 var start = DateTime.Now;
-                RunJobs();
+                RunJobs().Wait();
                 var end = DateTime.Now;
                 var elapsed = (end - start).TotalMilliseconds;
                 _counters.LogExecution(elapsed);
@@ -72,7 +73,7 @@ namespace OpenHab.UniFiProxy
                 ;
         }
 
-        static void RunJobs()
+        static async Task RunJobs()
         {
             var thisRun = DateTime.Now;
             Bootstrap data = null;
@@ -82,7 +83,7 @@ namespace OpenHab.UniFiProxy
                 {
                     if (data == null)
                     {
-                        data = _uniFiClient.GetBootstrap();
+                        data = await _uniFiClient.GetBootstrap();
                     }
                     switch (job.Type.ToLower())
                     {
@@ -111,11 +112,11 @@ namespace OpenHab.UniFiProxy
             }
         }
 
-        private static bool Initialize()
+        private static async Task<bool> Initialize()
         {
             Log.Write("Connecting to NVR.");
 
-            var nvrData = _uniFiClient.GetBootstrap();
+            var nvrData = await _uniFiClient.GetBootstrap();
 
             if (nvrData == null)
             {

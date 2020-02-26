@@ -59,7 +59,6 @@ namespace OpenHab.UniFiProxy.Clients
             PostChangedValue(job, camera.state);
         }
 
-
         public void RunStorage(JobSettings.Job job, Bootstrap bootstrap)
         {
             var totStorage = Math.Round(bootstrap.nvr.storageInfo.totalSize / 1e+9, 1);

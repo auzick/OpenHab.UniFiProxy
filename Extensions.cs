@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using System.Web;
 using OpenHab.UniFiProxy.Model;
 
 namespace OpenHab.UniFiProxy
@@ -11,7 +12,6 @@ namespace OpenHab.UniFiProxy
         public static T ParseResponseJson<T>(this HttpResponseMessage response)
         {
             return response.Content.ReadAsStringAsync().Result.ParseJson<T>();
-            // return ParseJson<T>(json);
         }
 
         public static T ParseJson<T>(this string json)
@@ -33,7 +33,11 @@ namespace OpenHab.UniFiProxy
         public static DateTime FromUnixTime(this long unixTime)
         {
             return DateTimeOffset.FromUnixTimeMilliseconds(unixTime).LocalDateTime;
-            // return epoch.AddMilliseconds(unixTime).ToLocalTime();
+        }
+
+        public static DateTime FromUnixTime(this long? unixTime)
+        {
+            return ((long)unixTime).FromUnixTime();
         }
 
         public static long ToUnixTimestamp(this DateTime date)
@@ -66,6 +70,15 @@ namespace OpenHab.UniFiProxy
             return true;
         }
 
+        public static Uri SetQueryValue(this Uri uri, string name, string value)
+        {
+            var builder = new UriBuilder(uri);
+            var nameValues = HttpUtility.ParseQueryString(uri.Query);
+            nameValues.Set(name, value);
+            string url = uri.AbsolutePath;
+            builder.Query = nameValues.ToString();
+            return builder.Uri;
+        }
 
     }
 }

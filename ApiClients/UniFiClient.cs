@@ -15,7 +15,7 @@ namespace OpenHab.UniFiProxy.Clients
         UserInfo AuthenticatedUser { get; }
         string AccessKey { get; }
 
-        Bootstrap GetBootstrap();
+        Task<Bootstrap> GetBootstrap();
     }
 
     public class UniFiClient : IUniFiClient
@@ -37,11 +37,11 @@ namespace OpenHab.UniFiProxy.Clients
             Log.Write("UniFiClient initialized.");
         }
 
-        public Bootstrap GetBootstrap()
+        public async Task<Bootstrap> GetBootstrap()
         {
             var url = $"{_config.UnifiApiUrl}/bootstrap";
             var req = new HttpRequestMessage(HttpMethod.Get, url);
-            var response = CallUniFiApi(req);
+            var response = await CallUniFiApi(req);
             if (response == null || !response.IsSuccessStatusCode)
             {
                 Log.Write(
@@ -52,7 +52,7 @@ namespace OpenHab.UniFiProxy.Clients
                 return null;
             }
 
-            var json = response.Content.ReadAsStringAsync().Result;
+            var json = await response.Content.ReadAsStringAsync();
             try { File.WriteAllText(Path.Join(_config.AppPath, "bootstrap.json"), json); } catch { }
 
             var bootstrap = json.ParseJson<Bootstrap>();
@@ -67,7 +67,7 @@ namespace OpenHab.UniFiProxy.Clients
 
             var url = $"{_config.UnifiApiUrl}/api/cameras/{cameraId}/snapshot";
             var req = new HttpRequestMessage(HttpMethod.Get, url);
-            var response = CallUniFiApiWithAccessKey(req);
+            var response = await CallUniFiApiWithAccessKey(req);
             if (response == null || !response.IsSuccessStatusCode)
             {
                 Log.Write(
@@ -91,14 +91,14 @@ namespace OpenHab.UniFiProxy.Clients
 
         }
 
-        protected HttpResponseMessage CallUniFiApi(HttpRequestMessage request)
+        protected async Task<HttpResponseMessage> CallUniFiApi(HttpRequestMessage request)
         {
             _client.DefaultRequestHeaders.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             if (string.IsNullOrWhiteSpace(_bearerToken))
             {
-                if (!Authenticate())
+                if (!await Authenticate())
                 {
                     //Log.Write("Cannot call UniFi API. Could not authenticate.");
                     return null;
@@ -108,44 +108,44 @@ namespace OpenHab.UniFiProxy.Clients
             _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_bearerToken}");
 
             //Log.Write($"UniFi API call: {request.RequestUri.AbsoluteUri}");
-            var result = _client.SendAsync(request).Result;
+            var result = await _client.SendAsync(request);
             if (!result.IsSuccessStatusCode)
             {
                 if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
                     // Try one more time ... token may be stale 
                     Log.Write($"Failed. Reauthenticating.");
-                    if (!Authenticate())
+                    if (!await Authenticate())
                     {
                         Log.Write("Cannot call UniFi API. Could not authenticate.");
                         return null;
                     }
                     Log.Write($"Retry API Request: {request.RequestUri.AbsoluteUri}");
-                    result = _client.SendAsync(request).Result;
+                    result = await _client.SendAsync(request);
                 }
             }
 
             return result;
         }
 
-        protected HttpResponseMessage CallUniFiApiWithAccessKey(HttpRequestMessage request, bool recurse = false)
+        protected async Task<HttpResponseMessage> CallUniFiApiWithAccessKey(HttpRequestMessage request, bool recurse = false)
         {
             request.RequestUri = request.RequestUri.SetQueryValue("accessKey", AccessKey);
-            var result = CallUniFiApi(request);
+            var result = await CallUniFiApi(request);
             if (result.IsSuccessStatusCode || result.StatusCode != System.Net.HttpStatusCode.Unauthorized)
                 return result;
             // Maybe the access key is stale? Refresh it and try one more time
             if (recurse)
                 return result;
-            RefreshAccessKey();
-            return CallUniFiApiWithAccessKey(request, true);
+            await RefreshAccessKey();
+            return await CallUniFiApiWithAccessKey(request, true);
         }
 
-        protected bool RefreshAccessKey()
+        protected async Task<bool> RefreshAccessKey()
         {
             var url = $"{_config.UnifiApiUrl}/auth/access-key";
             var req = new HttpRequestMessage(HttpMethod.Get, url);
-            var response = CallUniFiApi(req);
+            var response = await CallUniFiApi(req);
             if (response == null || !response.IsSuccessStatusCode)
             {
                 Log.Write(
@@ -155,13 +155,13 @@ namespace OpenHab.UniFiProxy.Clients
                     );
                 return false;
             }
-            var json = response.Content.ReadAsStringAsync().Result;
+            var json = await response.Content.ReadAsStringAsync();
             var bootstrap = json.ParseJson<UniFiAccessKey>();
             AccessKey = bootstrap.accessKey;
             return true;
         }
 
-        protected bool Authenticate()
+        protected async Task<bool> Authenticate()
         {
             Log.Write($"UniFi client authenticating.");
             _bearerToken = string.Empty;
@@ -178,7 +178,7 @@ namespace OpenHab.UniFiProxy.Clients
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             // Log.Write($"API Request: {req.RequestUri.AbsoluteUri}");
-            HttpResponseMessage response = _client.SendAsync(req).Result;
+            HttpResponseMessage response = await _client.SendAsync(req);
 
             if (!response.IsSuccessStatusCode)
             {

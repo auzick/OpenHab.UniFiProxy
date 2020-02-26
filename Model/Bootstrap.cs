@@ -159,13 +159,13 @@ namespace OpenHab.UniFiProxy.Model
 
         public class Stats
         {
-            public long rxBytes { get; set; }
+            public long? rxBytes { get; set; }
             public long? txBytes { get; set; }
             public Wifi wifi { get; set; }
             public Battery battery { get; set; }
             public Video video { get; set; }
-            public int wifiQuality { get; set; }
-            public int wifiStrength { get; set; }
+            public int? wifiQuality { get; set; }
+            public int? wifiStrength { get; set; }
         }
 
         public class NvrFeatureFlags
@@ -204,10 +204,10 @@ namespace OpenHab.UniFiProxy.Model
 
         public class PirSettings
         {
-            public int pirSensitivity { get; set; }
-            public int pirMotionClipLength { get; set; }
-            public int timelapseFrameInterval { get; set; }
-            public int timelapseTransferInterval { get; set; }
+            public int? pirSensitivity { get; set; }
+            public int? pirMotionClipLength { get; set; }
+            public int? timelapseFrameInterval { get; set; }
+            public int? timelapseTransferInterval { get; set; }
         }
 
         public class WifiConnectionState
@@ -227,9 +227,9 @@ namespace OpenHab.UniFiProxy.Model
             public string connectionHost { get; set; }
             public string type { get; set; }
             public string name { get; set; }
-            public long upSince { get; set; }
+            public long? upSince { get; set; }
             public long? lastSeen { get; set; }
-            public long connectedSince { get; set; }
+            public long? connectedSince { get; set; }
             public string state { get; set; }
             public string hardwareRevision { get; set; }
             public string firmwareVersion { get; set; }
@@ -242,7 +242,7 @@ namespace OpenHab.UniFiProxy.Model
             public bool isSshEnabled { get; set; }
             public bool canManage { get; set; }
             public bool isHidden { get; set; }
-            public long lastMotion { get; set; }
+            public long? lastMotion { get; set; }
             public int micVolume { get; set; }
             public bool isMicEnabled { get; set; }
             public bool isRecording { get; set; }
@@ -256,7 +256,7 @@ namespace OpenHab.UniFiProxy.Model
             public object elementInfo { get; set; }
             public int chimeDuration { get; set; }
             public bool isDark { get; set; }
-            public int motionStartCalls { get; set; }
+            public int? motionStartCalls { get; set; }
             public object lastRing { get; set; }
             public WiredConnectionState wiredConnectionState { get; set; }
             public IList<Channel> channels { get; set; }
@@ -278,7 +278,7 @@ namespace OpenHab.UniFiProxy.Model
             public string platform { get; set; }
             public bool hasSpeaker { get; set; }
             public bool hasWifi { get; set; }
-            public long audioBitrate { get; set; }
+            public long? audioBitrate { get; set; }
             public string modelKey { get; set; }
         }
 

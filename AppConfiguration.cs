@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
@@ -73,12 +75,21 @@ namespace OpenHab.UniFiProxy
                 }
                 catch { }
                 Log.Write($"Job poll interval: {Jobs.PollInterval}");
-                Log.Write("Jobs:");
-                foreach (var job in Jobs.Jobs)
-                {
-                    var msg = $"  {job.Type} {job.Id}: {job.Item}";
-                    Log.Write(msg);
-                }
+
+                Log.Write("Jobs:" + System.Environment.NewLine + Jobs.Jobs.ToStringTable(
+                    new string[] { "Type", "Camera", "openHAB Item", "Frequency" },
+                    j => j.Type,
+                    c => c.Id ?? "",
+                    c => c.Item,
+                    c => c.Frequency
+                    ));
+
+                // Log.Write("Jobs:");
+                // foreach (var job in Jobs.Jobs)
+                // {
+                //     var msg = $"  {job.Type} {job.Id}: {job.Item}";
+                //     Log.Write(msg);
+                // }
             }
             if (Jobs.Jobs.Count == 0)
             {

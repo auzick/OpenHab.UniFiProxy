@@ -21,56 +21,56 @@ namespace OpenHab.UniFiProxy.Model
 
         public class WiredConnectionState
         {
-            public int? phyRate { get; set; }
+            public long? phyRate { get; set; }
         }
 
         public class Channel
         {
-            public int id { get; set; }
+            public long? id { get; set; }
             public string name { get; set; }
-            public bool enabled { get; set; }
-            public bool isRtspEnabled { get; set; }
+            public bool? enabled { get; set; }
+            public bool? isRtspEnabled { get; set; }
             public object rtspAlias { get; set; }
-            public int width { get; set; }
-            public int height { get; set; }
-            public int fps { get; set; }
-            public int bitrate { get; set; }
-            public int minBitrate { get; set; }
-            public int maxBitrate { get; set; }
+            public long? width { get; set; }
+            public long? height { get; set; }
+            public long? fps { get; set; }
+            public long? bitrate { get; set; }
+            public long? minBitrate { get; set; }
+            public long? maxBitrate { get; set; }
             public IList<int> fpsValues { get; set; }
-            public int idrInterval { get; set; }
+            public long? idrInterval { get; set; }
         }
 
         public class IspSettings
         {
             public string aeMode { get; set; }
             public string irLedMode { get; set; }
-            public int irLedLevel { get; set; }
-            public int wdr { get; set; }
-            public int icrSensitivity { get; set; }
-            public int brightness { get; set; }
-            public int contrast { get; set; }
-            public int hue { get; set; }
-            public int saturation { get; set; }
-            public int sharpness { get; set; }
-            public int denoise { get; set; }
-            public bool isFlippedVertical { get; set; }
-            public bool isFlippedHorizontal { get; set; }
-            public bool isAutoRotateEnabled { get; set; }
-            public bool isLdcEnabled { get; set; }
-            public bool is3dnrEnabled { get; set; }
-            public bool isExternalIrEnabled { get; set; }
-            public bool isAggressiveAntiFlickerEnabled { get; set; }
-            public bool isPauseMotionEnabled { get; set; }
-            public int dZoomCenterX { get; set; }
-            public int dZoomCenterY { get; set; }
-            public int dZoomScale { get; set; }
-            public int dZoomStreamId { get; set; }
+            public long? irLedLevel { get; set; }
+            public long? wdr { get; set; }
+            public long? icrSensitivity { get; set; }
+            public long? brightness { get; set; }
+            public long? contrast { get; set; }
+            public long? hue { get; set; }
+            public long? saturation { get; set; }
+            public long? sharpness { get; set; }
+            public long? denoise { get; set; }
+            public bool? isFlippedVertical { get; set; }
+            public bool? isFlippedHorizontal { get; set; }
+            public bool? isAutoRotateEnabled { get; set; }
+            public bool? isLdcEnabled { get; set; }
+            public bool? is3dnrEnabled { get; set; }
+            public bool? isExternalIrEnabled { get; set; }
+            public bool? isAggressiveAntiFlickerEnabled { get; set; }
+            public bool? isPauseMotionEnabled { get; set; }
+            public long? dZoomCenterX { get; set; }
+            public long? dZoomCenterY { get; set; }
+            public long? dZoomScale { get; set; }
+            public long? dZoomStreamId { get; set; }
             public string focusMode { get; set; }
-            public int focusPosition { get; set; }
-            public int touchFocusX { get; set; }
-            public int touchFocusY { get; set; }
-            public int zoomPosition { get; set; }
+            public long? focusPosition { get; set; }
+            public long? touchFocusX { get; set; }
+            public long? touchFocusY { get; set; }
+            public long? zoomPosition { get; set; }
         }
 
         public class TalkbackSettings
@@ -78,47 +78,47 @@ namespace OpenHab.UniFiProxy.Model
             public string typeFmt { get; set; }
             public string typeIn { get; set; }
             public string bindAddr { get; set; }
-            public int bindPort { get; set; }
+            public long? bindPort { get; set; }
             public string filterAddr { get; set; }
-            public int? filterPort { get; set; }
-            public int channels { get; set; }
-            public int samplingRate { get; set; }
-            public int bitsPerSample { get; set; }
-            public int quality { get; set; }
+            public long? filterPort { get; set; }
+            public long? channels { get; set; }
+            public long? samplingRate { get; set; }
+            public long? bitsPerSample { get; set; }
+            public long? quality { get; set; }
         }
 
         public class OsdSettings
         {
-            public bool isNameEnabled { get; set; }
-            public bool isDateEnabled { get; set; }
-            public bool isLogoEnabled { get; set; }
-            public bool isDebugEnabled { get; set; }
+            public bool? isNameEnabled { get; set; }
+            public bool? isDateEnabled { get; set; }
+            public bool? isLogoEnabled { get; set; }
+            public bool? isDebugEnabled { get; set; }
         }
 
         public class LedSettings
         {
-            public bool isEnabled { get; set; }
-            public int blinkRate { get; set; }
+            public bool? isEnabled { get; set; }
+            public long? blinkRate { get; set; }
         }
 
         public class SpeakerSettings
         {
-            public bool isEnabled { get; set; }
-            public bool areSystemSoundsEnabled { get; set; }
-            public int volume { get; set; }
+            public bool? isEnabled { get; set; }
+            public bool? areSystemSoundsEnabled { get; set; }
+            public long? volume { get; set; }
         }
 
         public class RecordingSettings
         {
-            public int prePaddingSecs { get; set; }
-            public int postPaddingSecs { get; set; }
-            public int minMotionEventTrigger { get; set; }
-            public int endMotionEventDelay { get; set; }
-            public bool suppressIlluminationSurge { get; set; }
+            public long? prePaddingSecs { get; set; }
+            public long? postPaddingSecs { get; set; }
+            public long? minMotionEventTrigger { get; set; }
+            public long? endMotionEventDelay { get; set; }
+            public bool? suppressIlluminationSurge { get; set; }
             public string mode { get; set; }
             public string geofencing { get; set; }
-            public bool useNewMotionAlgorithm { get; set; }
-            public bool enablePirTimelapse { get; set; }
+            public bool? useNewMotionAlgorithm { get; set; }
+            public bool? enablePirTimelapse { get; set; }
         }
 
         public class MotionZone
@@ -126,22 +126,22 @@ namespace OpenHab.UniFiProxy.Model
             public string name { get; set; }
             public string color { get; set; }
             public IList<IList<int>> points { get; set; }
-            public int sensitivity { get; set; }
+            public long? sensitivity { get; set; }
         }
 
         public class Wifi
         {
-            public int? channel { get; set; }
-            public int? frequency { get; set; }
-            public int? linkSpeedMbps { get; set; }
-            public int? signalQuality { get; set; }
-            public int? signalStrength { get; set; }
+            public long? channel { get; set; }
+            public long? frequency { get; set; }
+            public long? linkSpeedMbps { get; set; }
+            public long? signalQuality { get; set; }
+            public long? signalStrength { get; set; }
         }
 
         public class Battery
         {
-            public int? percentage { get; set; }
-            public bool isCharging { get; set; }
+            public long? percentage { get; set; }
+            public bool? isCharging { get; set; }
             public string sleepState { get; set; }
         }
 
@@ -164,64 +164,64 @@ namespace OpenHab.UniFiProxy.Model
             public Wifi wifi { get; set; }
             public Battery battery { get; set; }
             public Video video { get; set; }
-            public int? wifiQuality { get; set; }
-            public int? wifiStrength { get; set; }
+            public long? wifiQuality { get; set; }
+            public long? wifiStrength { get; set; }
         }
 
         public class NvrFeatureFlags
         {
-            public bool beta { get; set; }
-            public bool dev { get; set; }
+            public bool? beta { get; set; }
+            public bool? dev { get; set; }
         }
 
         public class CameraFeatureFlags
         {
-            public bool canAdjustIrLedLevel { get; set; }
-            public bool canMagicZoom { get; set; }
-            public bool canOpticalZoom { get; set; }
-            public bool canTouchFocus { get; set; }
-            public bool hasAccelerometer { get; set; }
-            public bool hasAec { get; set; }
-            public bool hasBattery { get; set; }
-            public bool hasBluetooth { get; set; }
-            public bool hasChime { get; set; }
-            public bool hasExternalIr { get; set; }
-            public bool hasIcrSensitivity { get; set; }
-            public bool hasLdc { get; set; }
-            public bool hasLedIr { get; set; }
-            public bool hasLedStatus { get; set; }
-            public bool hasLineIn { get; set; }
-            public bool hasMic { get; set; }
-            public bool hasPrivacyMask { get; set; }
-            public bool hasRtc { get; set; }
-            public bool hasSdCard { get; set; }
-            public bool hasSpeaker { get; set; }
-            public bool hasWifi { get; set; }
-            public bool hasHdr { get; set; }
-            public bool hasAutoICROnly { get; set; }
-            public bool hasMotionZones { get; set; }
+            public bool? canAdjustIrLedLevel { get; set; }
+            public bool? canMagicZoom { get; set; }
+            public bool? canOpticalZoom { get; set; }
+            public bool? canTouchFocus { get; set; }
+            public bool? hasAccelerometer { get; set; }
+            public object hasAec { get; set; }
+            public bool? hasBattery { get; set; }
+            public bool? hasBluetooth { get; set; }
+            public bool? hasChime { get; set; }
+            public bool? hasExternalIr { get; set; }
+            public bool? hasIcrSensitivity { get; set; }
+            public bool? hasLdc { get; set; }
+            public bool? hasLedIr { get; set; }
+            public bool? hasLedStatus { get; set; }
+            public bool? hasLineIn { get; set; }
+            public bool? hasMic { get; set; }
+            public bool? hasPrivacyMask { get; set; }
+            public bool? hasRtc { get; set; }
+            public bool? hasSdCard { get; set; }
+            public bool? hasSpeaker { get; set; }
+            public bool? hasWifi { get; set; }
+            public bool? hasHdr { get; set; }
+            public bool? hasAutoICROnly { get; set; }
+            public bool? hasMotionZones { get; set; }
         }
 
         public class PirSettings
         {
-            public int? pirSensitivity { get; set; }
-            public int? pirMotionClipLength { get; set; }
-            public int? timelapseFrameInterval { get; set; }
-            public int? timelapseTransferInterval { get; set; }
+            public long? pirSensitivity { get; set; }
+            public long? pirMotionClipLength { get; set; }
+            public long? timelapseFrameInterval { get; set; }
+            public long? timelapseTransferInterval { get; set; }
         }
 
         public class WifiConnectionState
         {
-            public int? channel { get; set; }
-            public int? frequency { get; set; }
-            public int? phyRate { get; set; }
-            public int? signalQuality { get; set; }
-            public int? signalStrength { get; set; }
+            public long? channel { get; set; }
+            public long? frequency { get; set; }
+            public long? phyRate { get; set; }
+            public long? signalQuality { get; set; }
+            public long? signalStrength { get; set; }
         }
 
         public class Camera
         {
-            public bool isDeleting { get; set; }
+            public bool? isDeleting { get; set; }
             public string mac { get; set; }
             public string host { get; set; }
             public string connectionHost { get; set; }
@@ -234,29 +234,29 @@ namespace OpenHab.UniFiProxy.Model
             public string hardwareRevision { get; set; }
             public string firmwareVersion { get; set; }
             public string firmwareBuild { get; set; }
-            public bool isUpdating { get; set; }
-            public bool isAdopting { get; set; }
-            public bool isManaged { get; set; }
-            public bool isProvisioned { get; set; }
-            public bool isRebooting { get; set; }
-            public bool isSshEnabled { get; set; }
-            public bool canManage { get; set; }
-            public bool isHidden { get; set; }
+            public bool? isUpdating { get; set; }
+            public bool? isAdopting { get; set; }
+            public bool? isManaged { get; set; }
+            public bool? isProvisioned { get; set; }
+            public bool? isRebooting { get; set; }
+            public bool? isSshEnabled { get; set; }
+            public bool? canManage { get; set; }
+            public bool? isHidden { get; set; }
             public long? lastMotion { get; set; }
-            public int micVolume { get; set; }
-            public bool isMicEnabled { get; set; }
-            public bool isRecording { get; set; }
-            public bool isMotionDetected { get; set; }
-            public bool isAttemptingToConnect { get; set; }
-            public int? phyRate { get; set; }
-            public bool hdrMode { get; set; }
+            public long? micVolume { get; set; }
+            public bool? isMicEnabled { get; set; }
+            public bool? isRecording { get; set; }
+            public bool? isMotionDetected { get; set; }
+            public bool? isAttemptingToConnect { get; set; }
+            public long? phyRate { get; set; }
+            public bool? hdrMode { get; set; }
             public bool? isProbingForWifi { get; set; }
             public object apMac { get; set; }
             public object apRssi { get; set; }
             public object elementInfo { get; set; }
-            public int chimeDuration { get; set; }
-            public bool isDark { get; set; }
-            public int? motionStartCalls { get; set; }
+            public long? chimeDuration { get; set; }
+            public bool? isDark { get; set; }
+            public long? motionStartCalls { get; set; }
             public object lastRing { get; set; }
             public WiredConnectionState wiredConnectionState { get; set; }
             public IList<Channel> channels { get; set; }
@@ -274,10 +274,10 @@ namespace OpenHab.UniFiProxy.Model
             public PirSettings pirSettings { get; set; }
             public WifiConnectionState wifiConnectionState { get; set; }
             public string id { get; set; }
-            public bool isConnected { get; set; }
+            public bool? isConnected { get; set; }
             public string platform { get; set; }
-            public bool hasSpeaker { get; set; }
-            public bool hasWifi { get; set; }
+            public bool? hasSpeaker { get; set; }
+            public bool? hasWifi { get; set; }
             public long? audioBitrate { get; set; }
             public string modelKey { get; set; }
         }
@@ -289,7 +289,7 @@ namespace OpenHab.UniFiProxy.Model
         public class Web
         {
             [JsonPropertyName("liveview.includeGlobal")]
-            public bool liveview_includeGlobal { get; set; }
+            public bool? liveview_includeGlobal { get; set; }
             [JsonPropertyName("elements.viewmode")]
             public string elements_viewmode { get; set; }
         }
@@ -302,7 +302,7 @@ namespace OpenHab.UniFiProxy.Model
 
         public class Location
         {
-            public bool isAway { get; set; }
+            public bool? isAway { get; set; }
             public object latitude { get; set; }
             public object longitude { get; set; }
         }
@@ -357,17 +357,17 @@ namespace OpenHab.UniFiProxy.Model
         {
             public IList<string> permissions { get; set; }
             public string lastLoginIp { get; set; }
-            public long lastLoginTime { get; set; }
-            public bool isOwner { get; set; }
+            public long? lastLoginTime { get; set; }
+            public bool? isOwner { get; set; }
             public string localUsername { get; set; }
-            public bool enableNotifications { get; set; }
-            public bool syncSso { get; set; }
+            public bool? enableNotifications { get; set; }
+            public bool? syncSso { get; set; }
             public Settings settings { get; set; }
             public IList<string> groups { get; set; }
             public CloudAccount cloudAccount { get; set; }
             public IList<AlertRule> alertRules { get; set; }
             public string id { get; set; }
-            public bool hasAcceptedInvite { get; set; }
+            public bool? hasAcceptedInvite { get; set; }
             public string role { get; set; }
             public IList<string> allPermissions { get; set; }
             public string modelKey { get; set; }
@@ -378,7 +378,7 @@ namespace OpenHab.UniFiProxy.Model
             public string name { get; set; }
             public IList<string> permissions { get; set; }
             public string type { get; set; }
-            public bool isDefault { get; set; }
+            public bool? isDefault { get; set; }
             public string id { get; set; }
             public string modelKey { get; set; }
         }
@@ -387,14 +387,14 @@ namespace OpenHab.UniFiProxy.Model
         {
             public IList<string> cameras { get; set; }
             public string cycleMode { get; set; }
-            public int cycleInterval { get; set; }
+            public long? cycleInterval { get; set; }
         }
 
         public class Liveview
         {
             public string name { get; set; }
-            public bool isGlobal { get; set; }
-            public int layout { get; set; }
+            public bool? isGlobal { get; set; }
+            public long? layout { get; set; }
             public IList<Slot> slots { get; set; }
             public string owner { get; set; }
             public string id { get; set; }
@@ -403,37 +403,37 @@ namespace OpenHab.UniFiProxy.Model
 
         public class Ports
         {
-            public int ump { get; set; }
-            public int http { get; set; }
-            public int https { get; set; }
-            public int rtsp { get; set; }
-            public int rtmp { get; set; }
-            public int elementsWss { get; set; }
-            public int cameraHttps { get; set; }
-            public int cameraTcp { get; set; }
-            public int liveWs { get; set; }
-            public int liveWss { get; set; }
-            public int tcpStreams { get; set; }
-            public int emsCLI { get; set; }
-            public int emsLiveFLV { get; set; }
-            public int cameraEvents { get; set; }
-            public int discoveryClient { get; set; }
+            public long? ump { get; set; }
+            public long? http { get; set; }
+            public long? https { get; set; }
+            public long? rtsp { get; set; }
+            public long? rtmp { get; set; }
+            public long? elementsWss { get; set; }
+            public long? cameraHttps { get; set; }
+            public long? cameraTcp { get; set; }
+            public long? liveWs { get; set; }
+            public long? liveWss { get; set; }
+            public long? tcpStreams { get; set; }
+            public long? emsCLI { get; set; }
+            public long? emsLiveFLV { get; set; }
+            public long? cameraEvents { get; set; }
+            public long? discoveryClient { get; set; }
         }
 
         public class WifiSettings
         {
-            public bool useThirdPartyWifi { get; set; }
+            public bool? useThirdPartyWifi { get; set; }
             public object ssid { get; set; }
             public object password { get; set; }
         }
 
         public class LocationSettings
         {
-            public bool isAway { get; set; }
-            public bool isGeofencingEnabled { get; set; }
+            public bool? isAway { get; set; }
+            public bool? isGeofencingEnabled { get; set; }
             public double latitude { get; set; }
             public double longitude { get; set; }
-            public int radius { get; set; }
+            public long? radius { get; set; }
         }
 
         public class StorageUtilization
@@ -449,7 +449,7 @@ namespace OpenHab.UniFiProxy.Model
             public string serial { get; set; }
             public string firmware { get; set; }
             public long size { get; set; }
-            public int RPM { get; set; }
+            public long? RPM { get; set; }
             public string ataVersion { get; set; }
             public string sataVersion { get; set; }
             public string health { get; set; }
@@ -468,8 +468,8 @@ namespace OpenHab.UniFiProxy.Model
             public string mac { get; set; }
             public string host { get; set; }
             public string name { get; set; }
-            public bool canAutoUpdate { get; set; }
-            public bool isStatsGatheringEnabled { get; set; }
+            public bool? canAutoUpdate { get; set; }
+            public bool? isStatsGatheringEnabled { get; set; }
             public string timezone { get; set; }
             public string version { get; set; }
             public string firmwareVersion { get; set; }
@@ -477,36 +477,36 @@ namespace OpenHab.UniFiProxy.Model
             public string hardwarePlatform { get; set; }
             public Ports ports { get; set; }
             public object setupCode { get; set; }
-            public int uptime { get; set; }
+            public long? uptime { get; set; }
             public long lastSeen { get; set; }
-            public bool isUpdating { get; set; }
+            public bool? isUpdating { get; set; }
             public long lastUpdateAt { get; set; }
-            public bool isConnectedToCloud { get; set; }
+            public bool? isConnectedToCloud { get; set; }
             public object cloudConnectionError { get; set; }
-            public bool isStation { get; set; }
-            public bool enableAutomaticBackups { get; set; }
-            public bool enableStatsReporting { get; set; }
-            public bool isSshEnabled { get; set; }
+            public bool? isStation { get; set; }
+            public bool? enableAutomaticBackups { get; set; }
+            public bool? enableStatsReporting { get; set; }
+            public bool? isSshEnabled { get; set; }
             public object errorCode { get; set; }
             public string releaseChannel { get; set; }
             public object availableUpdate { get; set; }
             public IList<string> hosts { get; set; }
             public string hardwareId { get; set; }
             public string hardwareRevision { get; set; }
-            public int hostType { get; set; }
-            public bool isHardware { get; set; }
+            public long? hostType { get; set; }
+            public bool? isHardware { get; set; }
             public string timeFormat { get; set; }
             public object recordingRetentionDurationMs { get; set; }
-            public bool enableCrashReporting { get; set; }
-            public bool disableAudio { get; set; }
+            public bool? enableCrashReporting { get; set; }
+            public bool? disableAudio { get; set; }
             public WifiSettings wifiSettings { get; set; }
             public LocationSettings locationSettings { get; set; }
             public NvrFeatureFlags featureFlags { get; set; }
             public StorageInfo storageInfo { get; set; }
             public string id { get; set; }
-            public bool isAdopted { get; set; }
-            public bool isAway { get; set; }
-            public bool isSetup { get; set; }
+            public bool? isAdopted { get; set; }
+            public bool? isAway { get; set; }
+            public bool? isSetup { get; set; }
             public string network { get; set; }
             public string type { get; set; }
             public long upSince { get; set; }
